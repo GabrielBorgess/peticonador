@@ -3,6 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 
 const AuthForm = () => {
@@ -17,7 +21,7 @@ const AuthForm = () => {
 
     const handleSubmit = async () => {
         setMessage('Signing in...');
-        
+
         try {
             const signInResponse = await signIn('credentials', {
                 email,
@@ -25,13 +29,13 @@ const AuthForm = () => {
                 redirect: false,
             })
 
-            if(!signInResponse || signInResponse.ok !== true) {
+            if (!signInResponse || signInResponse.ok !== true) {
                 setMessage("Invalid credentials");
             } else {
                 router.push('/protected/dashboard')
             }
 
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
 
@@ -46,15 +50,48 @@ const AuthForm = () => {
     }, [status, router]);
 
     return (
-        <div className='flex flex-col gap-4 bg-gray-400 p-4'>
-            <input type='text' value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        <>
+            <Card className="w-full max-w-md mx-auto">
+                <CardHeader>
+                    <CardTitle>Login</CardTitle>
+                    <CardDescription>Insira suas informações de acesso.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="password">Password</Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <Button type="submit" className="w-full" onClick={handleSubmit}>
+                            Sign In
+                        </Button>
+                    </div>
+                </CardContent>
+                <CardFooter className="flex justify-center">
+                    <p className="text-sm text-muted-foreground">
+                        {message}
+                    </p>
+                </CardFooter>
+            </Card>
 
-            <button onClick={handleSubmit}>Sign in</button>
-
-            <p>{message}</p>
-        </div>
-    );
+        </>
+    )
 };
 
 export default AuthForm
