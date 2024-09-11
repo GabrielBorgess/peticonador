@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model Widget {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+}
+
+model User {
+  id       Int       @id @default(sequence())
+  name     String
+  email    String    @unique
+  password String
+  role     Role      @default(CRC)
+  assistidos  Assistido[]
+  solicitacoes Solicitacao[]
+}
+
+model Assistido {
+  id       Int        @id @default(sequence())
+  name     String
+  crc      User       @relation(fields: [crcId], references: [id])
+  crcId    Int
+  solicitacoes Solicitacao[]
+}
+
+model Solicitacao {
+  id         Int       @id @default(sequence())
+  type       String
+  status     String    @default("pendente")
+  createdAt  DateTime  @default(now())
+  assistido  Assistido @relation(fields: [assistidoId], references: [id])
+  assistidoId Int
+  crc        User      @relation(fields: [crcId], references: [id])
+  crcId      Int
+}
+
+enum Role {
+  ADMIN
+  CRC
+}
