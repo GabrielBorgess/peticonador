@@ -28,7 +28,7 @@ const AuthForm = () => {
             if(!signInResponse || signInResponse.ok !== true) {
                 setMessage("Invalid credentials");
             } else {
-                router.refresh();
+                router.push('/protected/dashboard')
             }
 
         } catch(err) {
@@ -41,9 +41,9 @@ const AuthForm = () => {
     useEffect(() => {
         if (status === 'authenticated') {
             router.refresh();
-            router.push('/');
+            router.push('/protected/dashboard');
         }
-    }, [status]);
+    }, [status, router]);
 
     return (
         <div className='flex flex-col gap-4 bg-gray-400 p-4'>
