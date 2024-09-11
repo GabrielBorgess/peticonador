@@ -2,12 +2,18 @@
   "name": "peticionador",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "db:seed": "node --loader ts-node/esm src/app/lib/prisma.ts",
     "lint": "next lint"
   },
+    "compilerOptions": {
+      "module": "ESNext",
+      "moduleResolution": "node"
+    },
   "dependencies": {
     "@prisma/client": "^5.19.1",
     "bcryptjs": "^2.4.3",
@@ -20,6 +26,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.16.5",
     "@types/react": "^18",
     "@types/react-dom": "^18",
