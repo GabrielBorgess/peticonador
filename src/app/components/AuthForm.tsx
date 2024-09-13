@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 const AuthForm = () => {
     const router = useRouter();
 
-    const { status } = useSession();
+    const { data:session, status } = useSession();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ const AuthForm = () => {
     const [message, setMessage] = useState('');
 
     const handleSubmit = async () => {
-        setMessage('Signing in...');
+        setMessage('Entrando...');
 
         try {
             const signInResponse = await signIn('credentials', {
@@ -30,7 +30,7 @@ const AuthForm = () => {
             })
 
             if (!signInResponse || signInResponse.ok !== true) {
-                setMessage("Invalid credentials");
+                setMessage("Credenciais inválidas");
             } else {
                 router.push('/protected/dashboard')
             }
@@ -38,16 +38,15 @@ const AuthForm = () => {
         } catch (err) {
             console.log(err);
         }
-
-        setMessage(message);
     };
 
     useEffect(() => {
         if (status === 'authenticated') {
+            console.log('User Session:', session?.user)
             router.refresh();
             router.push('/protected/dashboard');
         }
-    }, [status, router]);
+    }, [status, router, session]);
 
     return (
         <>
@@ -78,7 +77,7 @@ const AuthForm = () => {
                                 required
                             />
                         </div>
-                        <Button type="submit" className="w-full" onClick={handleSubmit}>
+                        <Button type="button" className="w-full" onClick={handleSubmit}>
                             Sign In
                         </Button>
                     </div>

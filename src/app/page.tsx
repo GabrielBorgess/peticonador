@@ -1,9 +1,6 @@
-import Navbar from "./components/NavBar";
-
+import { redirect } from "next/navigation";
 export default function Home() {
   return (
-    <>
-    <Navbar />
-    </>
+    redirect("/protected/dashboard")
   );
 }

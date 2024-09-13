@@ -49,7 +49,8 @@ export const authOptions: AuthOptions = {
 
                 return {
                   ...user,
-                  id: user.id.toString()
+                  id: user.id.toString(),
+                  role: user.role
                 }
             }
         })
@@ -89,6 +90,12 @@ export const authOptions: AuthOptions = {
                 params.session.user.email = params.token.email;
             }
 
+            if (typeof params.token.role === 'string') {
+                params.session.user.role = params.token.role;
+            } else {
+                params.session.user.role = null;
+            }            
+
             return params.session;
         },
         async jwt(params: {
@@ -100,6 +107,7 @@ export const authOptions: AuthOptions = {
         }) {
             if(params.user) {
                 params.token.email = params.user.email;
+                params.token.role = params.user.role;
             }
 
             return params.token;
