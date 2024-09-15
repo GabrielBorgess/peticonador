@@ -30,6 +30,8 @@ const AuthForm = () => {
             })
 
             if (!signInResponse || signInResponse.ok !== true) {
+                setEmail('');
+                setPassword('');
                 setMessage("Credenciais inválidas");
             } else {
                 router.push('/protected/dashboard')
