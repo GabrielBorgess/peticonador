@@ -1,20 +1,21 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
 
-export default async function  handler(req: NextApiRequest, res: NextApiResponse){
-    const session = await getServerSession(req, res, authOptions);
-
-    if(!session){
-        return res.status(401).json({message: "Não autenticado"});
+export async function POST(request: Request) {
+    const session = await getServerSession(authOptions);
+  
+    if (!session) {
+        console.log("Não autenticado");
+      return NextResponse.json({ message: "Não autenticado" }, { status: 401 });
     }
-
-    if(session.user?.role !== "ADMIN"){
-        return res.status(403).json({message: "Acesso negado"})
+  
+    if (session.user?.role !== "ADMIN") {
+        console.log("Acesso negado");
+      return NextResponse.json({ message: "Acesso negado" }, { status: 403 });
     }
-
-    if(req.method === "POST"){
-        res.send({message: "CRC criado com sucesso"})
-    }
-}
+    
+    console.log("CRC criado com sucesso");
+    return NextResponse.json({ message: "CRC criado com sucesso" }, { status: 200 });
+  }
