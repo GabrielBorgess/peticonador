@@ -40,12 +40,13 @@ const DashboardPage = async () => {
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <h2 className="text-xl font-semibold text-gray-800">Petições:</h2>
-            <Button className="bg-blue-500 hover:bg-blue-600 text-white"
-             
-            >
-              <PlusIcon className="w-5 h-5 mr-2" />
-              Create
-            </Button>
+            <Link href={'/protected/createCRC'}>
+              <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+                <PlusIcon className="w-5 h-5 mr-2" />
+                Create
+              </Button>
+            </Link>
+            
           </div>
         </header>
 
@@ -53,7 +54,6 @@ const DashboardPage = async () => {
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
             <div className="border-4 border-dashed border-gray-200 rounded-lg h-96 flex items-center justify-center">
-              <p className="text-gray-500 text-xl">Empty space for future content</p>
             </div>
           </div>
         </div>
