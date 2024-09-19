@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     const session = await getServerSession(authOptions);
+    console.log(request)
   
     if (!session) {
         console.log("Não autenticado");

@@ -51,7 +51,7 @@ const CreateCRCForm = () => {
         <CardDescription>Preencha as informações abaixo</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4"
+        <div className="space-y-4"
           onSubmit={handleSubmit}
         >
           <div className="space-y-2">
@@ -75,10 +75,10 @@ const CreateCRCForm = () => {
             onChange={(e)=>{setPassword(e.target.value)}}
             />
           </div>
-          <Button type="submit" className="w-full">
-            
+          <Button onClick={handleSubmit} type="submit" className="w-full">
+            Criar
           </Button>
-        </form>
+        </div>
       </CardContent>
       <CardFooter>
         {/* {submitError && (
