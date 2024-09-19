@@ -17,7 +17,7 @@ const CreateCRCForm = () => {
     const userData = {
       name,
       email,
-      passwordHash: password
+      password: password
     }
 
     try{
