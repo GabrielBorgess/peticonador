@@ -35,8 +35,12 @@ const CreateCRCForm = () => {
 
       if(res.ok){
         console.log("user criado com sucesso")
+        setEmail('');
+        setPassword('');
+        setName('');
       } else {
         console.log(data.message)
+        
       }
     } catch(err){
       console.log("Erro ao criar user")
@@ -47,7 +51,7 @@ const CreateCRCForm = () => {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle>Crie um novo CRC user</CardTitle>
+        <CardTitle>Crie um novo User</CardTitle>
         <CardDescription>Preencha as informações abaixo</CardDescription>
       </CardHeader>
       <CardContent>

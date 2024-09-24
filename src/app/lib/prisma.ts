@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export default prisma;
 
 async function main() {
-    const hashedPassword = await bcrypt.hash('admin', 10)  // Gerando o hash da senha
+    const hashedPassword = await bcrypt.hash('admin', 10)
   
     const admin = await prisma.user.upsert({
       where: { email: 'admin@gmail.com' },
@@ -14,7 +14,7 @@ async function main() {
       create: {
         name: 'Admin',
         email: 'admin@gmail.com',
-        passwordHash: hashedPassword,  // Usando a senha hash
+        passwordHash: hashedPassword, 
         role: 'ADMIN',
       },
     })
