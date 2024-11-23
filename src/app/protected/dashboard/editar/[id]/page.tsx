@@ -17,8 +17,8 @@ const EditarSolicitacao = () => {
         .then((response) => response.json())
         .then((data) => {
           setSolicitacao(data);
-          setStatus(data.status); // Preenche o status atual
-          setDescription(data.description); // Preenche a descrição atual
+          setStatus(data.status);
+          setDescription(data.description);
         })
         .catch((error) => console.error('Erro ao buscar solicitação:', error));
     }
