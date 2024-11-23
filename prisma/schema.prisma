@@ -12,32 +12,42 @@ model Widget {
 }
 
 model User {
-  id       Int       @id @default(sequence())
-  name     String
-  email    String    @unique
+  id           Int          @id @default(sequence())
+  name         String
+  email        String       @unique
   passwordHash String
-  role     Role      @default(CRC)
-  assistidos  Assistido[]
-  solicitacoes Solicitacao[]
+  role         Role         @default(CRC)
+  assistidos   Assistido[]
+  historicos   HistoricoSolicitacao[]
 }
 
 model Assistido {
-  id       Int        @id @default(sequence())
-  name     String
-  crc      User       @relation(fields: [crcId], references: [id])
-  crcId    Int
+  id           Int          @id @default(sequence())
+  name         String
+  crc          User         @relation(fields: [crcId], references: [id])
+  crcId        Int
   solicitacoes Solicitacao[]
 }
 
 model Solicitacao {
-  id         Int       @id @default(sequence())
-  type       String
-  status     String    @default("pendente")
-  createdAt  DateTime  @default(now())
-  assistido  Assistido @relation(fields: [assistidoId], references: [id])
-  assistidoId Int
-  crc        User      @relation(fields: [crcId], references: [id])
-  crcId      Int
+  id           Int                  @id @default(sequence())
+  type         String
+  desciption   String
+  status       String               @default("pendente")
+  createdAt    DateTime             @default(now())
+  assistido    Assistido            @relation(fields: [assistidoId], references: [id])
+  assistidoId  Int
+  historicos   HistoricoSolicitacao[]
+}
+
+model HistoricoSolicitacao {
+  id            Int          @id @default(sequence())
+  solicitacaoId Int
+  solicitacao   Solicitacao  @relation(fields: [solicitacaoId], references: [id])
+  usuarioId     Int
+  usuario       User         @relation(fields: [usuarioId], references: [id])
+  acao          String       
+  createdAt     DateTime     @default(now())
 }
 
 enum Role {
