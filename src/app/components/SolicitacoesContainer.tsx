@@ -1,5 +1,7 @@
 'use client'
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
+
 
 interface Solicitacao {
     id: number;
@@ -9,9 +11,7 @@ interface Solicitacao {
     createdAt: Date;
 }
 
-const handleChangeStatus = (id: number) => {
-    console.log(id)
-}
+
 
 export default function SolicitacoesContainer() {
     const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>([]);
@@ -19,7 +19,7 @@ export default function SolicitacoesContainer() {
     useEffect(() => {
         const fetchSolicitacoes = async () => {
             try {
-                const response = await fetch('/api/solicitacao');
+                const response = await fetch('/api/solicitacoes');
                 const data = await response.json();
                 setSolicitacoes(data.solicitacoes);
             } catch (error) {
@@ -58,11 +58,8 @@ export default function SolicitacoesContainer() {
                                 <td className="py-2 px-4">{solicitacao.status}</td>
                                 <td className="py-2 px-4">{new Date(solicitacao.createdAt).toLocaleDateString()}</td>
                                 <td className="py-2 px-4">
-                                    <button 
-                                        className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600"
-                                        onClick={() => handleChangeStatus(solicitacao.id)}>
-                                        Mudar Status
-                                    </button>
+                                <Link href={`/protected/dashboard/editar/${solicitacao.id}`}>editar
+                                </Link>
                                 </td>
                             </tr>
                         ))}
