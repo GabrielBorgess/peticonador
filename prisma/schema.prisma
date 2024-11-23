@@ -17,16 +17,13 @@ model User {
   email        String       @unique
   passwordHash String
   role         Role         @default(CRC)
-  assistidos   Assistido[]
   historicos   HistoricoSolicitacao[]
 }
 
 model Assistido {
   id           Int          @id @default(sequence())
   name         String
-  crc          User         @relation(fields: [crcId], references: [id])
-  crcId        Int
-  solicitacoes Solicitacao[]
+  solicitacoes Solicitacao[] // Relacionamento de um assistido com várias solicitações
 }
 
 model Solicitacao {
@@ -35,10 +32,11 @@ model Solicitacao {
   desciption   String
   status       String               @default("pendente")
   createdAt    DateTime             @default(now())
-  assistido    Assistido            @relation(fields: [assistidoId], references: [id])
   assistidoId  Int
+  assistido    Assistido            @relation(fields: [assistidoId], references: [id])
   historicos   HistoricoSolicitacao[]
 }
+
 
 model HistoricoSolicitacao {
   id            Int          @id @default(sequence())
