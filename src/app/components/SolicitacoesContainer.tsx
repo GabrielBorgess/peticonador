@@ -11,8 +11,6 @@ interface Solicitacao {
     createdAt: Date;
 }
 
-
-
 export default function SolicitacoesContainer() {
     const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>([]);
 
@@ -58,7 +56,7 @@ export default function SolicitacoesContainer() {
                                 <td className="py-2 px-4">{solicitacao.status}</td>
                                 <td className="py-2 px-4">{new Date(solicitacao.createdAt).toLocaleDateString()}</td>
                                 <td className="py-2 px-4">
-                                <Link href={`/protected/dashboard/editar/${solicitacao.id}`}>editar
+                                <Link href={`/pages/dashboard/editar/${solicitacao.id}`}>editar
                                 </Link>
                                 </td>
                             </tr>

@@ -5,7 +5,7 @@ import React from 'react'
 const page = () => {
   return (
     <>    
-      <Link href={'/protected/dashboard'} className='absolute p-6 font-bold'> Go back</Link>
+      <Link href={'/pages/dashboard'} className='absolute p-6 font-bold'> Go back</Link>
       <div className='flex flex-col justify-center items-center h-screen'>
         <CreateCRCForm />
       </div>

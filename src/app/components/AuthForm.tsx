@@ -34,7 +34,7 @@ const AuthForm = () => {
                 setPassword('');
                 setMessage("Credenciais inválidas");
             } else {
-                router.push('/protected/dashboard')
+                router.push('/pages/dashboard')
             }
 
         } catch (err) {
@@ -46,7 +46,7 @@ const AuthForm = () => {
         if (status === 'authenticated') {
             console.log('User Session:', session?.user)
             router.refresh();
-            router.push('/protected/dashboard');
+            router.push('/pages/dashboard');
         }
     }, [status, router, session]);
 

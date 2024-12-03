@@ -37,7 +37,7 @@ const DashboardPage = async () => {
         <header className="bg-white shadow-sm">
           <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <h2 className="text-xl font-semibold text-gray-800">Solicitações:</h2>
-            {session !== null && session.user?.role === 'ADMIN' ? <Link href={'/protected/createCRC'}>
+            {session !== null && session.user?.role === 'ADMIN' ? <Link href={'/pages/createCRC'}>
               <Button className="bg-blue-500 hover:bg-blue-600 text-white">
                 <PlusIcon className="w-5 h-5 mr-2" />
                 Create CRC

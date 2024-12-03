@@ -3,11 +3,11 @@ import { getServerSession } from 'next-auth/next';
 import { redirect } from 'next/navigation';
 import React from 'react'
 
-interface ProtectedLayoutProps {
+interface PagesLayoutProps {
     children: React.ReactNode | React.ReactNode[];
 }
 
-const ProtectedLayout = async ({children}: ProtectedLayoutProps) => {
+const PagesLayout = async ({children}: PagesLayoutProps) => {
 
     const session = await getServerSession(authOptions);
 
@@ -25,4 +25,4 @@ const ProtectedLayout = async ({children}: ProtectedLayoutProps) => {
   );
 }
 
-export default ProtectedLayout
+export default PagesLayout
