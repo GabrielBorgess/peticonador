@@ -25,7 +25,7 @@ const EditarSolicitacao = () => {
   }, [id]);
 
   const handleSave = async () => {
-    const updatedSolicitacao = { status, description };
+    const updatedSolicitacao = { status, description, usuarioId: 1};
 
     try {
       const response = await fetch(`/api/solicitacao/${id}`, {

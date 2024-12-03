@@ -34,7 +34,7 @@ export async function PATCH(request: Request) {
     }
 
     const body = await request.json();
-    const { status, description } = body;
+    const { status, description, usuarioId } = body;
 
     try {
       const updatedSolicitacao = await prisma.solicitacao.update({
@@ -42,6 +42,15 @@ export async function PATCH(request: Request) {
         data: {
           status,
           desciption : description,
+        },
+      });
+
+      await prisma.historicoSolicitacao.create({
+        data: {
+          solicitacaoId: updatedSolicitacao.id,
+          usuarioId, 
+          acao: status,
+          description
         },
       });
 
